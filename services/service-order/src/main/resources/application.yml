@@ -8,10 +8,12 @@ spring:
     name: service-order
   cloud:
     nacos:
-      server-addr: 127.0.0.1:8848
+      server-addr: 150.158.27.19:8848
+      # 这里禁用检查禁止掉 = false,不然会报错
       config:
         import-check:
           enabled: false
+          # 这里的含义是如果 pring.profiles.active 没有激活的话，则使用 public 命名空间下的配置
         namespace: ${spring.profiles.active:public}
 
 

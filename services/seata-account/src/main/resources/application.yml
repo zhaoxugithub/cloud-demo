@@ -17,4 +17,5 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-
+#seata:
+#  data-source-proxy-mode: XA
