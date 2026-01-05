@@ -4,9 +4,10 @@ import java.util.concurrent.TimeUnit;
 
 import com.atguigu.product.bean.Product;
 import com.atguigu.product.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-
+@Slf4j
 @Service
 public class ProductServiceImpl implements ProductService {
     @Override
@@ -17,6 +18,7 @@ public class ProductServiceImpl implements ProductService {
         product.setProductName("苹果-"+productId);
         product.setNum(2);
 
+        log.info("aaaaaa");
 //        try {
 //            TimeUnit.SECONDS.sleep(100);
 //        } catch (InterruptedException e) {
