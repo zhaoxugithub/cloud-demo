@@ -16,8 +16,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class ProductController {
 
-
-
     @Autowired
     ProductService productService;
 

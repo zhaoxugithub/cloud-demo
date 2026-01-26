@@ -9,8 +9,6 @@ import java.util.UUID;
 
 @Component
 public class XTokenRequestInterceptor implements RequestInterceptor {
-
-
     /**
      * 请求拦截器
      * @param template 请求模板
