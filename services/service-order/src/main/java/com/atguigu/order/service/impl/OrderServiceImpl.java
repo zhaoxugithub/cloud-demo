@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 
 
-import com.alibaba.csp.sentinel.SphU;
-import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.atguigu.order.bean.Order;
 import com.atguigu.order.feign.ProductFeignClient;
@@ -35,10 +33,21 @@ public class OrderServiceImpl implements OrderService {
 
     // @SentinelResource(value = "createOrder", blockHandler = "createOrderFallback")
     @Override
-    public Order createOrder(Long productId, Long userId) {
-//        Product product = getProductFromRemoteWithLoadBalanceAnnotation(productId);
-        // 使用Feign完成远程调用
-        Product product = productFeignClient.getProductById(productId);
+    public Order createOrder(Long productId, Long userId, Long version) {
+
+        Product product = null;
+        if (version == 1) {
+            product = getProductFromRemote(version);
+        } else if (version == 2) {
+            product = getProductFromRemoteWithLoadBalance(version);
+        } else if (version == 3) {
+            product = getProductFromRemoteWithLoadBalanceAnnotation(version);
+        } else {
+            // 使用Feign完成远程调用
+            product = productFeignClient.getProductById(version);
+        }
+
+        product = productFeignClient.getProductById(productId);
         Order order = new Order();
         order.setId(1L);
         // 总金额

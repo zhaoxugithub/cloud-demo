@@ -2,15 +2,11 @@ package com.atguigu.order.controller;
 
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
-import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.atguigu.order.bean.Order;
 import com.atguigu.order.properties.OrderProperties;
 import com.atguigu.order.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -42,16 +38,16 @@ public class OrderController {
     //创建订单
     @GetMapping("/create")
     public Order createOrder(@RequestParam("userId") Long userId,
+                             @RequestParam("version") Long version,
                              @RequestParam("productId") Long productId){
-        Order order = orderService.createOrder(productId, userId);
-        return order;
+        return orderService.createOrder(productId, userId, version);
     }
 
     @GetMapping("/seckill")
     @SentinelResource(value = "seckill-order",fallback = "seckillFallback")
     public Order seckill(@RequestParam(value = "userId",required = false) Long userId,
                              @RequestParam(value = "productId",defaultValue = "1000") Long productId){
-        Order order = orderService.createOrder(productId, userId);
+        Order order = orderService.createOrder(productId, userId, 1L);
         order.setId(Long.MAX_VALUE);
         return order;
     }

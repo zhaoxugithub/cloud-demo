@@ -4,5 +4,5 @@ import com.atguigu.order.bean.Order;
 
 public interface OrderService {
 
-    Order createOrder(Long productId,Long userId);
+    Order createOrder(Long productId, Long userId, Long version);
 }
