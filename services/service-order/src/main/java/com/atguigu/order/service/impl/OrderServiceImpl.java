@@ -34,20 +34,21 @@ public class OrderServiceImpl implements OrderService {
     // @SentinelResource(value = "createOrder", blockHandler = "createOrderFallback")
     @Override
     public Order createOrder(Long productId, Long userId, Long version) {
-
-        Product product = null;
+        Product product;
         if (version == 1) {
+            log.info("使用最原始的方式调用远程服务，version={}", version);
             product = getProductFromRemote(version);
         } else if (version == 2) {
+            log.info("使用负载均衡的方式调用远程服务，version={}", version);
             product = getProductFromRemoteWithLoadBalance(version);
         } else if (version == 3) {
+            log.info("使用注解负载均衡的方式调用远程服务，version={}", version);
             product = getProductFromRemoteWithLoadBalanceAnnotation(version);
         } else {
             // 使用Feign完成远程调用
+            log.info("使用Feign方式调用远程服务，version={}", version);
             product = productFeignClient.getProductById(version);
         }
-
-        product = productFeignClient.getProductById(productId);
         Order order = new Order();
         order.setId(1L);
         // 总金额
@@ -59,12 +60,9 @@ public class OrderServiceImpl implements OrderService {
         order.setProductList(Arrays.asList(product));
 //        try {
 //            SphU.entry("hahah");
-//
 //        } catch (BlockException e) {
 //            //编码处理
 //        }
-
-
         return order;
     }
 
