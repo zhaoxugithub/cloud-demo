@@ -27,12 +27,13 @@ public class ProductController {
         String header = request.getHeader("X-Token");
         System.out.println("hello .... token=【"+header+"】");
         Product product = productService.getProductById(productId);
+        // 模拟抛异常
 //        int i = 10/0;
-//        try {
-//            TimeUnit.SECONDS.sleep(2);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+       try {
+           TimeUnit.SECONDS.sleep(2);
+       } catch (InterruptedException e) {
+           throw new RuntimeException(e);
+       }
         return product;
     }
 }
