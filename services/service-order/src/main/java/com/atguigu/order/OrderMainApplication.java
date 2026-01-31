@@ -32,8 +32,8 @@ public class OrderMainApplication {
     ApplicationRunner applicationRunner(NacosConfigManager nacosConfigManager){
         return  args -> {
             ConfigService configService = nacosConfigManager.getConfigService();
-            configService.addListener("service-order.properties",
-                    "DEFAULT_GROUP", new Listener() {
+            configService.addListener("common.properties",
+                    "order", new Listener() {
                         @Override
                         public Executor getExecutor() {
                             return Executors.newFixedThreadPool(4);

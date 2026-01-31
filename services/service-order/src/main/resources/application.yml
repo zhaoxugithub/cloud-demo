@@ -14,7 +14,8 @@ spring:
         import-check:
           enabled: false
           # 这里的含义是如果 pring.profiles.active 没有激活的话，则使用 public 命名空间下的配置
-        namespace: ${spring.profiles.active:public}
+        namespace: public
+#        namespace: ${spring.profiles.active:public}
 
 seata:
   enabled: false
