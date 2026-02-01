@@ -7,10 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "seata-order")
 public interface OrderFeignClient {
-
-
     /**
      * 创建订单
+     *
      * @param userId
      * @param commodityCode
      * @param orderCount
@@ -18,6 +17,6 @@ public interface OrderFeignClient {
      */
     @GetMapping("/create")
     String create(@RequestParam("userId") String userId,
-                         @RequestParam("commodityCode") String commodityCode,
-                         @RequestParam("count") int orderCount);
+                  @RequestParam("commodityCode") String commodityCode,
+                  @RequestParam("count") int orderCount);
 }

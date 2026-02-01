@@ -17,22 +17,16 @@ public class RtGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
-
         String uri = request.getURI().toString();
         long start = System.currentTimeMillis();
-        log.info("请求【{}】开始：时间：{}",uri,start);
+        log.info("请求【{}】开始：时间：{}", uri, start);
         //========================以上是前置逻辑=========================
-
-
         Mono<Void> filter = chain.filter(exchange)
-                .doFinally((result)->{
+                .doFinally((result) -> {
                     //=======================以下是后置逻辑=========================
                     long end = System.currentTimeMillis();
-                    log.info("请求【{}】结束：时间：{}，耗时：{}ms",uri,end,end-start);
+                    log.info("请求【{}】结束：时间：{}，耗时：{}ms", uri, end, end - start);
                 }); //放行   10s
-
-
-
         return filter;
     }
 

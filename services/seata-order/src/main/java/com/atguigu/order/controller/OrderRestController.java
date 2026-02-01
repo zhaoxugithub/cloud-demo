@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class OrderRestController {
-
     @Autowired
     OrderService orderService;
 
-
     /**
      * 创建订单
+     *
      * @param userId
      * @param commodityCode
      * @param orderCount
@@ -25,10 +24,9 @@ public class OrderRestController {
     @GetMapping("/create")
     public String create(@RequestParam("userId") String userId,
                          @RequestParam("commodityCode") String commodityCode,
-                         @RequestParam("count") int orderCount)
-    {
+                         @RequestParam("count") int orderCount) {
         OrderTbl tbl = orderService.create(userId, commodityCode, orderCount);
-        return "order create success = 订单id：【"+tbl.getId()+"】";
+        return "order create success = 订单id：【" + tbl.getId() + "】";
     }
 
 }
