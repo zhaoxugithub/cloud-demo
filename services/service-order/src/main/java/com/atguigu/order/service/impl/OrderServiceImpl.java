@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.atguigu.order.bean.Order;
 import com.atguigu.order.feign.ProductFeignClient;
@@ -31,7 +32,7 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ProductFeignClient productFeignClient;
 
-    // @SentinelResource(value = "createOrder", blockHandler = "createOrderFallback")
+    @SentinelResource(value = "createOrder", blockHandler = "createOrderFallback")
     @Override
     public Order createOrder(Long productId, Long userId, Long version) {
         Product product;
@@ -68,6 +69,14 @@ public class OrderServiceImpl implements OrderService {
 
 
     // 兜底回调
+
+    /**
+     * 当发生限流异常的时候进行兜底回调
+     * @param productId
+     * @param userId
+     * @param e
+     * @return
+     */
     public Order createOrderFallback(Long productId, Long userId, BlockException e) {
         Order order = new Order();
         order.setId(0L);
