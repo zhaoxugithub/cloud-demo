@@ -8,7 +8,7 @@ spring:
     name: service-order
   cloud:
     nacos:
-      server-addr: 150.158.27.19:8848
+      server-addr: 192.168.5.3:8848
       # 这里禁用检查禁止掉 = false,不然会报错
       config:
         import-check:

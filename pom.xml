@@ -28,7 +28,7 @@
         <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
     </properties>
 
-
+<!--    它只声明版本，不实际引入依赖。子模块写依赖时可以省略 <version>，由这里统一决定。-->
     <dependencyManagement>
         <dependencies>
             <dependency>

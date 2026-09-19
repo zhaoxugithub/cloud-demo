@@ -46,7 +46,7 @@ public class OrderController {
     @SentinelResource(value = "seckill-order",fallback = "seckillFallback")
     public Order seckill(@RequestParam(value = "userId",required = false) Long userId,
                              @RequestParam(value = "productId",defaultValue = "1000") Long productId){
-        Order order = orderService.createOrder(productId, userId, 1L);
+        Order order = orderService.createOrder(productId, userId, 9999L);
         order.setId(Long.MAX_VALUE);
         return order;
     }

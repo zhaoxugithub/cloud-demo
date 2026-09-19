@@ -13,7 +13,7 @@ public class OrderConfig {
 
 
 
-//    @Bean
+    @Bean
     Retryer retryer(){
         return new Retryer.Default();
     }

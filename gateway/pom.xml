@@ -16,7 +16,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-
+    <!--    注意这里是 dependencies，不是 dependencyManagement，表示真正引入依赖。所有依赖都没写 <version>，因为版本由父 POM 的 dependencyManagement 统一管理。-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>

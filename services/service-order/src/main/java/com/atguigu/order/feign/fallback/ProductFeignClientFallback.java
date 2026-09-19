@@ -6,6 +6,9 @@ import com.atguigu.product.bean.Product;
 import org.springframework.stereotype.Component;
 
 
+/**
+ * 重试之后才会执行兜底方法
+ */
 @Component
 public class ProductFeignClientFallback implements ProductFeignClient {
     @Override
