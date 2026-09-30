@@ -32,7 +32,7 @@ public class OrderMainApplication {
     ApplicationRunner applicationRunner(NacosConfigManager nacosConfigManager){
         return  args -> {
             ConfigService configService = nacosConfigManager.getConfigService();
-            configService.addListener("common.properties",
+                configService.addListener("common.properties",
                     "order", new Listener() {
                         @Override
                         public Executor getExecutor() {

@@ -23,11 +23,12 @@ public class OrderServiceImpl implements OrderService {
         //2、扣减账户余额
         accountFeignClient.debit(userId, orderMoney);
         //3、保存订单
-        OrderTbl orderTbl = new OrderTbl();
-        orderTbl.setUserId(userId);
-        orderTbl.setCommodityCode(commodityCode);
-        orderTbl.setCount(orderCount);
-        orderTbl.setMoney(orderMoney);
+        OrderTbl orderTbl = new OrderTbl()
+                .setUserId(userId)
+                .setCommodityCode(commodityCode)
+                .setCount(orderCount)
+                .setMoney(orderMoney);
+
         //3、保存订单
         orderTblMapper.insert(orderTbl);
         int i = 10 / 0;

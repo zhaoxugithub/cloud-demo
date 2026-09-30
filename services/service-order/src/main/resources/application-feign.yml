@@ -14,7 +14,7 @@ spring:
     sentinel:
       transport:
         dashboard: 192.168.5.3:8858
-        client-ip: 192.168.5.11
+        client-ip: 192.168.5.9
       eager: true
       web-context-unify: false
 #            request-interceptors:

@@ -9,10 +9,7 @@ import lombok.Data;
 @Data
 public class StorageTbl implements Serializable {
     private Integer id;
-
     private String commodityCode;
-
     private Integer count;
-
     private static final long serialVersionUID = 1L;
 }
