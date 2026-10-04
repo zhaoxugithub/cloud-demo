@@ -10,11 +10,37 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+
+/*
+
+                 Gateway
+                       │
+                       ↓
+                Route Predicate
+                       │
+              匹配哪一个 Route
+                       │
+                       ↓
+              GlobalFilter
+                       │
+                       ↓
+              GatewayFilter
+                       │
+                       ↓
+                NettyRouting
+                       │
+                       ↓
+                  下游服务
+
+
+ */
+
 @Component
 @Slf4j
 public class RtGlobalFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        log.info("start {}", RtGlobalFilter.class.getSimpleName());
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();
         String uri = request.getURI().toString();

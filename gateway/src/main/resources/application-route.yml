@@ -1,6 +1,12 @@
 spring:
   cloud:
     gateway:
+      # 打印完整 HTTP 报文（配合 reactor.netty.http.client/server 的 DEBUG 日志）
+      httpclient:
+        wiretap: true
+      httpserver:
+        wiretap: true
+
       globalcors:
         cors-configurations:
           '[/**]':

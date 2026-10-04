@@ -10,3 +10,16 @@ spring:
 # localhost/api/order
 server:
   port: 8090
+
+# 观察 gateway 请求链路：Route 匹配 / Predicate 判定 / 过滤器执行顺序 / 出站请求
+logging:
+  level:
+    # 路由匹配 + Predicate 逐个匹配 + 最终 Route matched + 过滤器排序
+    org.springframework.cloud.gateway: TRACE
+    # 出站请求（转发到下游时的 URI、channel 信息）
+    org.springframework.cloud.gateway.filter.NettyRoutingFilter: TRACE
+    # Netty 客户端/服务端 wiretap（打印完整 HTTP 报文）
+    reactor.netty.http.client: DEBUG
+    reactor.netty.http.server: DEBUG
+    # 你自己的业务过滤器/断言
+    com.atguigu.gateway: DEBUG

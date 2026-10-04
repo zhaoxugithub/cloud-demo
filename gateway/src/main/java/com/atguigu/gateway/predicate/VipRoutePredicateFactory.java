@@ -2,6 +2,7 @@ package com.atguigu.gateway.predicate;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.handler.predicate.AbstractRoutePredicateFactory;
 import org.springframework.cloud.gateway.handler.predicate.GatewayPredicate;
 import org.springframework.cloud.gateway.handler.predicate.QueryRoutePredicateFactory;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 
+@Slf4j
 @Component
 public class VipRoutePredicateFactory extends AbstractRoutePredicateFactory<VipRoutePredicateFactory.Config> {
     public VipRoutePredicateFactory() {
@@ -23,6 +25,7 @@ public class VipRoutePredicateFactory extends AbstractRoutePredicateFactory<VipR
     }
     @Override
     public Predicate<ServerWebExchange> apply(Config config) {
+        log.info("start {}", VipRoutePredicateFactory.class.getSimpleName());
         return (GatewayPredicate) serverWebExchange -> {
             // localhost/search?q=haha&user=leifengyang
             ServerHttpRequest request = serverWebExchange.getRequest();

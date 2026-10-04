@@ -1,5 +1,6 @@
 package com.atguigu.gateway.filter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.factory.AbstractNameValueGatewayFilterFactory;
@@ -12,10 +13,12 @@ import reactor.core.publisher.Mono;
 import java.util.UUID;
 
 
+@Slf4j
 @Component
 public class OnceTokenGatewayFilterFactory extends AbstractNameValueGatewayFilterFactory {
     @Override
     public GatewayFilter apply(NameValueConfig config) {
+        log.info("start {}", OnceTokenGatewayFilterFactory.class.getSimpleName());
         return (exchange, chain) -> {
             //每次响应之前，添加一个一次性令牌，支持 uuid，jwt等各种格式
             return chain.filter(exchange).then(Mono.fromRunnable(()->{
